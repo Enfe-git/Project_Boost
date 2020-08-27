@@ -26,6 +26,25 @@ public class Rocket : MonoBehaviour
         Rotate();
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            case "Friendly":
+                print("OK");
+                break;
+
+            case "Fuel":
+                print("Fuel");
+                Destroy(collision.gameObject);
+                break;
+
+            default:
+                print("Dead");
+                break;
+        }
+    }
+
     // Check for keyboard input
     private void Rotate()
     {
@@ -72,4 +91,5 @@ public class Rocket : MonoBehaviour
             audioSource.Stop();
         }
     }
+
 }
