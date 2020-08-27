@@ -19,16 +19,38 @@ public class Rocket : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ProcessInput();
+        Thrust();
+        Rotate();
     }
 
     // Check for keyboard input
-    private void ProcessInput()
+    private void Rotate()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        rigidBody.freezeRotation = true; // take manual control of rotation
+
+        float rcsThrust = 100f;
+        float rotationSpeed = rcsThrust * Time.deltaTime;
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.Rotate(Vector3.forward * rotationSpeed);
+
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            transform.Rotate(Vector3.back * rotationSpeed);
+        }
+
+        rigidBody.freezeRotation = false;
+    }
+
+    private void Thrust()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && !Input.GetKey(KeyCode.Space))
         {
             audioSource.Play();
-        } else if (Input.GetKeyUp(KeyCode.Space))
+        }
+        else if (Input.GetKeyUp(KeyCode.Space))
         {
             audioSource.Stop();
         }
@@ -43,21 +65,6 @@ public class Rocket : MonoBehaviour
         else
         {
             audioSource.Stop();
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.Rotate(Vector3.forward);
-
-        } else if (Input.GetKey(KeyCode.D))
-        {
-            transform.Rotate(Vector3.back);
-        }
-        if (Input.GetKey(KeyCode.W))
-        {
-            transform.Rotate(Vector3.right);
-
-        } else if (Input.GetKey(KeyCode.S)) {
-            transform.Rotate(Vector3.left);
         }
     }
 }
