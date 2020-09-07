@@ -1,10 +1,14 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Rocket : MonoBehaviour
 {
+    /* TO DO
+     *  - Fix lightning
+     *  - Add more levels
+     *  - Add main menu
+     */
     [SerializeField] float rcsThrust = 100f;
     [SerializeField] float fwThrust = 100f;
 
@@ -34,18 +38,22 @@ public class Rocket : MonoBehaviour
                 print("OK");
                 break;
 
-            case "Fuel":
-                print("Fuel");
-                Destroy(collision.gameObject);
+            case "Finish":
+                print("Hit finish");
+                SceneManager.LoadScene(1);
                 break;
 
+            /*case "Fuel":
+                print("Fuel");
+                Destroy(collision.gameObject);
+                break;*/
+
             default:
-                print("Dead");
+                SceneManager.LoadScene(0);
                 break;
         }
     }
 
-    // Check for keyboard input
     private void Rotate()
     {
         rigidBody.freezeRotation = true; // take manual control of rotation
