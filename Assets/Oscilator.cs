@@ -22,7 +22,7 @@ public class Oscilator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //set movement factor
+        //set movement factor 
         float cycles = Time.time / period;
 
         const float tau = Mathf.PI * 2;
