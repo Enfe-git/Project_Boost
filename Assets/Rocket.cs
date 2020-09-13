@@ -10,7 +10,7 @@ public class Rocket : MonoBehaviour
      *  - Add main menu
      */
     [SerializeField] float rcsThrust = 100f;
-    [SerializeField] float fwThrust = 100f;
+    [SerializeField] float fwThrust = 250f;
 
     [SerializeField] AudioClip mainEngine;
     [SerializeField] AudioClip deathSound;
@@ -143,7 +143,7 @@ public class Rocket : MonoBehaviour
 
     private void ApplyThrust(float thrustSpeed)
     {
-        rigidBody.AddRelativeForce(Vector3.up * thrustSpeed * Time.deltaTime);
+        rigidBody.AddRelativeForce(Vector3.up * thrustSpeed);
         if (!audioSource.isPlaying)
         { 
             audioSource.PlayOneShot(mainEngine);
