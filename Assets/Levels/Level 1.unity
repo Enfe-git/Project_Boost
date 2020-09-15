@@ -2633,40 +2633,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3369261267495108624, guid: 545bba768f28fef4287eb27452da6662,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 561.76324
-      objectReference: {fileID: 0}
     - target: {fileID: 3369261267495108628, guid: 545bba768f28fef4287eb27452da6662,
         type: 3}
       propertyPath: m_Name
       value: Backdrop
-      objectReference: {fileID: 0}
-    - target: {fileID: 3369261267495108628, guid: 545bba768f28fef4287eb27452da6662,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3369261267495108630, guid: 545bba768f28fef4287eb27452da6662,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3369261267495108630, guid: 545bba768f28fef4287eb27452da6662,
-        type: 3}
-      propertyPath: m_ScaleInLightmap
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3369261267495108630, guid: 545bba768f28fef4287eb27452da6662,
-        type: 3}
-      propertyPath: m_StitchLightmapSeams
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3369261267495108630, guid: 545bba768f28fef4287eb27452da6662,
-        type: 3}
-      propertyPath: m_ReceiveShadows
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 545bba768f28fef4287eb27452da6662, type: 3}
