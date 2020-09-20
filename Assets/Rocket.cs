@@ -22,6 +22,7 @@ public class Rocket : MonoBehaviour
 
     public enum State { Alive, Dying, Transcending }
     public State state = State.Alive;
+    public bool isInvulnerable = false;
 
     //Finding the Rigidbody
     Rigidbody rigidBody;
@@ -44,6 +45,16 @@ public class Rocket : MonoBehaviour
         {
             RespondToThrustInput();
             RespondToRotateInput();
+
+            if (Input.GetKey(KeyCode.L)) {
+                currentScene++;
+                LoadNextScene();
+            }
+
+            if (Input.GetKeyDown(KeyCode.C)) {
+                isInvulnerable = !isInvulnerable;
+                print(isInvulnerable);
+            }
         }
     }
 
@@ -70,6 +81,9 @@ public class Rocket : MonoBehaviour
                 break;*/
 
             default:
+                if (isInvulnerable) {
+                    break;
+                }
                 StartDeathSequence();
                 break;
         }
@@ -96,7 +110,7 @@ public class Rocket : MonoBehaviour
 
     private void LoadNextScene()
     {
-        if (currentScene > 2)
+        if (currentScene > 4)
         {
             currentScene = 0;
         }
