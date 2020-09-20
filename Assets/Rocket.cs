@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -27,7 +28,6 @@ public class Rocket : MonoBehaviour
     //Finding the Rigidbody
     Rigidbody rigidBody;
     AudioSource audioSource;
-    static int currentScene = 0;
 
 
     // Start is called before the first frame update
@@ -41,20 +41,25 @@ public class Rocket : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   if (state == State.Alive)
-        {
+    {   if (state == State.Alive) {
             RespondToThrustInput();
             RespondToRotateInput();
+            //todo only if debug on
+        }
+        if (Debug.isDebugBuild) {
+            RespondToDebugKeys();
+        }
+        
+    }
 
-            if (Input.GetKey(KeyCode.L)) {
-                currentScene++;
-                LoadNextScene();
-            }
+    private void RespondToDebugKeys() {
+        if (Input.GetKeyDown(KeyCode.L)) {
+            LoadNextScene();
+        }
 
-            if (Input.GetKeyDown(KeyCode.C)) {
-                isInvulnerable = !isInvulnerable;
-                print(isInvulnerable);
-            }
+        if (Input.GetKeyDown(KeyCode.C)) {
+            isInvulnerable = !isInvulnerable;
+            print(isInvulnerable);
         }
     }
 
@@ -95,7 +100,7 @@ public class Rocket : MonoBehaviour
         state = State.Dying;
         audioSource.Stop();
         audioSource.PlayOneShot(deathSound);
-        Invoke("LoadNextScene", 1f);
+        Invoke("LoadFistScene", 1f);
     }
 
     private void StartSuccessSequence()
@@ -104,20 +109,24 @@ public class Rocket : MonoBehaviour
         audioSource.PlayOneShot(successSound);
         successParticles.Play();
         state = State.Transcending;
-        currentScene++;
         Invoke("LoadNextScene", 1f);
     }
 
-    private void LoadNextScene()
-    {
-        if (currentScene > 4)
-        {
-            currentScene = 0;
+    private void LoadNextScene() {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = currentSceneIndex + 1;
+        if (nextSceneIndex > SceneManager.sceneCountInBuildSettings - 1) {
+            LoadFirstScene();
         }
-        SceneManager.LoadScene(currentScene);
+        else {
+            SceneManager.LoadScene(nextSceneIndex);
+        }
 
 
+    }
 
+    private void LoadFirstScene() {
+        SceneManager.LoadScene(0);
     }
 
     private void RespondToRotateInput()
